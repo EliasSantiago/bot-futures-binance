@@ -7,10 +7,6 @@ let quantity = "0.01";
 
 app.use(express.json());
 
-app.use('/', async (req, res, next) => {
-  res.json('Bot Futures Binance')
-})
-
 app.use('/trandingview-buy', async (req, res, next) => {
   console.log(req.originalUrl);
   console.log(req.body);
@@ -35,6 +31,10 @@ app.use('/trandingview-sell', async (req, res, next) => {
     .catch(err => {
       console.error(err)
     })
+})
+
+app.use('/', async (req, res, next) => {
+  res.json('Bot Futures Binance')
 })
 
 app.listen(process.env.PORT, () => {
