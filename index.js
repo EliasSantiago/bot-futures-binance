@@ -7,6 +7,10 @@ let quantity = "0.01";
 
 app.use(express.json());
 
+app.use('/', async (req, res, next) => {
+  res.json('Bot Futures Binance')
+})
+
 app.use('/trandingview-buy', async (req, res, next) => {
   console.log(req.originalUrl);
   console.log(req.body);
