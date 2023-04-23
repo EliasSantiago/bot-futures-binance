@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx nodemon index",
     "start": "npx nodemon index",
-    "vercel-build": ""
+    "vercel-build": "npx nodemon index"
   },
   "keywords": [],
   "author": "",
