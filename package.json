@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon indexTradeView",
-    "start": "npx nodemon indexTradeView"
+    "dev": "npx nodemon index",
+    "start": "npx nodemon index",
+    "vercel-build": ""
   },
   "keywords": [],
   "author": "",
