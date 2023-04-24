@@ -21,26 +21,24 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
     let price = api.getBTCPrice(symbol);
     res.json(price);
 
-    return;
+    // let valorParaCompra = usdtBalance * percentualCompra;
+    // let quantidadeBTC = valorParaCompra / price;
 
-    let valorParaCompra = usdtBalance * percentualCompra;
-    let quantidadeBTC = valorParaCompra / price;
+    // api.marginType(symbol, "CROSSED");
 
-    api.marginType(symbol, "CROSSED");
-
-    api.setLeverage(symbol, leverage)
-      .then(data => {
-        const order = api.newOrder(symbol, quantidadeBTC, "BUY")
-          .then(data => {
-            res.json(data);
-          })
-          .catch(err => {
-            res.json(err);
-          })
-      })
-      .catch(err => {
-        res.json(err);
-      })
+    // api.setLeverage(symbol, leverage)
+    //   .then(data => {
+    //     const order = api.newOrder(symbol, quantidadeBTC, "BUY")
+    //       .then(data => {
+    //         res.json(data);
+    //       })
+    //       .catch(err => {
+    //         res.json(err);
+    //       })
+    //   })
+    //   .catch(err => {
+    //     res.json(err);
+    //   })
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
