@@ -8,8 +8,6 @@ let quantity = "0.01";
 app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
-  console.log(req.originalUrl);
-  console.log(req.body);
   const order = await api.newOrder(symbol, quantity, "BUY")
     .then(data => {
       console.log(data);
@@ -18,6 +16,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
     .catch(err => {
       console.error(err)
     })
+    res.json(order);
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
@@ -31,14 +30,11 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
     .catch(err => {
       console.error(err)
     })
+    res.json(order);
 })
 
 app.use('/', async (req, res, next) => {
-  res.json(process.env.API_KEY);
-  // console.log(process.env.PORT);
-  // console.log(process.env.API_KEY);
-  // console.log(process.env.SECRET_KEY);
-  //res.json(process.env.API_KEY);
+  res.json('Bot Futures Binance');
 })
 
 app.listen(process.env.PORT, () => {
