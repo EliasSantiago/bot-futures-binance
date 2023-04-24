@@ -19,7 +19,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
     })
 
     let price = api.getSymbolPrice(symbol);
-    res.json(price.lastPrice);
+    res.json(price);
 
     // let valorParaCompra = usdtBalance * percentualCompra;
     // let quantidadeBTC = valorParaCompra / price;
