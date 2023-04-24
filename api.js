@@ -83,7 +83,7 @@ async function getAccountInfo() {
   return result.data;
 }
 
-async function getBTCPrice(symbol) {
+async function getSymbolPrice(symbol) {
   const timestamp = Date.now();
   const recvWindows = 60000;
   const signature = crypto
@@ -94,7 +94,7 @@ async function getBTCPrice(symbol) {
 
   const result = await axios({
     method: 'GET',
-    url: `${apiUrl}fapi/v1/ticker/price${qs}&symbol=${symbol}`,
+    url: `${apiUrl}v1/ticker/24hr?symbol=${symbol}`,
     headers: { 'X-MBX-APIKEY': apiKey }
   });
 
@@ -106,5 +106,5 @@ module.exports = {
   setLeverage,
   marginType,
   getAccountInfo,
-  getBTCPrice
+  getSymbolPrice
 }
