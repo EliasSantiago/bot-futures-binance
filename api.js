@@ -65,8 +65,27 @@ async function marginType(symbol, marginType) {
   return result.data;
 }
 
+async function getAccountInfo() {
+  const timestamp = Date.now();
+  const recvWindows = 60000;
+  const signature = crypto
+    .createHmac('sha256', apiSecret)
+    .update(`${new URLSearchParams({timestamp, recvWindows}).toString()}`)
+    .digest('hex');
+  const qs = `?${new URLSearchParams({timestamp, recvWindows, signature}).toString()}`;
+
+  const result = await axios({
+    method: 'GET',
+    url: `${apiUrl}v1/account${qs}`,
+    headers: { 'X-MBX-APIKEY': apiKey }
+  });
+
+  return result.data;
+}
+
 module.exports = {
   newOrder,
   setLeverage,
-  marginType
+  marginType,
+  getAccountInfo
 }

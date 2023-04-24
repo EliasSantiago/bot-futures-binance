@@ -9,21 +9,34 @@ let leverage = 20;
 app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
-  await api.marginType(symbol, "CROSSED");
-  
-  await api.setLeverage(symbol, leverage)
-    .then(data => {
-      const order = api.newOrder(symbol, quantity, "BUY")
-        .then(data => {
-          res.json(data);
-        })
-        .catch(err => {
-          res.json(err);
-        })
-    })
-    .catch(err => {
-      res.json(err);
-    })
+  const saldoDisponivel = 500;
+  const percentualCompra = 0.25;
+  const taxaAtualBTC = 27000;
+
+  const valorParaCompra = saldoDisponivel * percentualCompra;
+  const quantidadeBTC = valorParaCompra / taxaAtualBTC;
+
+  await api.getAccountInfo().then(data => {
+    res.json(data);
+  }).catch(err => {
+    res.json(err);
+  })
+
+  // await api.marginType(symbol, "CROSSED");
+
+  // await api.setLeverage(symbol, leverage)
+  //   .then(data => {
+  //     const order = api.newOrder(symbol, quantity, "BUY")
+  //       .then(data => {
+  //         res.json(data);
+  //       })
+  //       .catch(err => {
+  //         res.json(err);
+  //       })
+  //   })
+  //   .catch(err => {
+  //     res.json(err);
+  //   })
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
