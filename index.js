@@ -13,12 +13,11 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
     .then(data => {
       const order = api.newOrder(symbol, quantity, "BUY")
         .then(data => {
-          return order;
+          res.json(order);
         })
         .catch(err => {
           return err
         })
-      res.json(order);
     })
     .catch(err => {
       res.json(err);
