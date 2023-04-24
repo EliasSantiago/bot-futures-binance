@@ -12,11 +12,11 @@ app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 
-    let usdtBalance = api.getAccountInfo().then(data => {
-      data.balances.filter(balance => {
-        return balance.asset === "USDT"
-      })
-    })
+    // let usdtBalance = api.getAccountInfo().then(data => {
+    //   data.balances.filter(balance => {
+    //     return balance.asset === "USDT"
+    //   })
+    // })
 
     let price = api.getSymbolPrice(symbol);
     res.json(price);
