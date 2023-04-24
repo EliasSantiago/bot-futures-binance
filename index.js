@@ -21,7 +21,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
   api.setLeverage(symbol, leverage)
     .then(() => {
       const lastPrice = api.getSymbolPrice(symbol)
-        .then(data => {
+        .then(() => {
           const usdtBalance = api.getAccountInfo()
             .then(data => {
               data.balances.filter(balance => {
@@ -29,7 +29,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
               })
             })
           let valorParaCompra = usdtBalance * percentualCompra;
-          let quantidadeBTC = valorParaCompra / data.lastPrice;
+          let quantidadeBTC = valorParaCompra / lastPrice;
 
           api.newOrder(symbol, quantidadeBTC, "BUY")
             .then(order => {
