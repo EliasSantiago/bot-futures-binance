@@ -1,42 +1,49 @@
 require("dotenv").config();
+const WebSocket = require('ws');
 const express = require("express");
 const api = require('./api');
 const app = express();
 let symbol = "BTCUSDT";
+let symbolToLowerCase = symbol.toLowerCase(symbol);
 let quantity = "0.01";
 let leverage = 20;
+let percentualCompra = 0.25;
+
 
 app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
-  const saldoDisponivel = 500;
-  const percentualCompra = 0.25;
-  const taxaAtualBTC = 27000;
+  const ws = new WebSocket(`${process.env.STREAM_URL}${symbolToLowerCase}usdt@markPrice@1s`);
 
-  const valorParaCompra = saldoDisponivel * percentualCompra;
-  const quantidadeBTC = valorParaCompra / taxaAtualBTC;
+  ws.onmessage = (event) => {
+    const obj = JSON.parse(event.data);
+    const price = parseFloat(obj.p);
 
-  await api.getAccountInfo().then(data => {
-    res.json(data);
-  }).catch(err => {
-    res.json(err);
-  })
+    let usdtBalance = api.getAccountInfo().then(data => {
+      data.balances.filter(balance => {
+        return balance.asset === "USDT"
+      })
+    })
 
-  // await api.marginType(symbol, "CROSSED");
+    let valorParaCompra = usdtBalance * percentualCompra;
+    let quantidadeBTC = valorParaCompra / price;
 
-  // await api.setLeverage(symbol, leverage)
-  //   .then(data => {
-  //     const order = api.newOrder(symbol, quantity, "BUY")
-  //       .then(data => {
-  //         res.json(data);
-  //       })
-  //       .catch(err => {
-  //         res.json(err);
-  //       })
-  //   })
-  //   .catch(err => {
-  //     res.json(err);
-  //   })
+    api.marginType(symbol, "CROSSED");
+
+    api.setLeverage(symbol, leverage)
+      .then(data => {
+        const order = api.newOrder(symbol, quantidadeBTC, "BUY")
+          .then(data => {
+            res.json(data);
+          })
+          .catch(err => {
+            res.json(err);
+          })
+      })
+      .catch(err => {
+        res.json(err);
+      })
+  }
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {

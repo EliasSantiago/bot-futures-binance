@@ -4,11 +4,7 @@ let symbol = "ADAUSDT";
 let quantity = "0.1000";
 let symbolToLowerCase = symbol.toLowerCase(symbol);
 
-console.log(symbolToLowerCase);
-
 const ws = new WebSocket(`${process.env.STREAM_URL}${symbolToLowerCase}usdt@markPrice@1s`);
-console.log(ws);
-
 const api = require('./api');
 let isOpened = false;
 
