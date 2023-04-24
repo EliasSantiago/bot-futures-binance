@@ -11,13 +11,6 @@ let percentualCompra = 0.25;
 app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
-
-  let usdtBalance = api.getAccountInfo().then(data => {
-    data.balances.filter(balance => {
-      return balance.asset === "USDT"
-    })
-  })
-
   api.setLeverage(symbol, leverage)
     .then(() => {
       const lastPrice = api.getSymbolPrice(symbol)
