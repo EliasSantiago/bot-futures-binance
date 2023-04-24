@@ -84,8 +84,6 @@ async function getAccountInfo() {
 }
 
 async function getSymbolPrice(symbol) {
-  return `${apiUrl}v1/ticker/24hr?symbol=${symbol}`;
-  
   const timestamp = Date.now();
   const recvWindows = 60000;
   const signature = crypto

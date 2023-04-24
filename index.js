@@ -12,35 +12,37 @@ app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 
-  // let usdtBalance = api.getAccountInfo().then(data => {
-  //   data.balances.filter(balance => {
-  //     return balance.asset === "USDT"
-  //   })
-  // })
-
-  await api.getSymbolPrice(symbol)
-    .then(data => {
-      res.json(data);
+  let usdtBalance = api.getAccountInfo().then(data => {
+    data.balances.filter(balance => {
+      return balance.asset === "USDT"
     })
+  })
 
-  // let valorParaCompra = usdtBalance * percentualCompra;
-  // let quantidadeBTC = valorParaCompra / price;
+  api.setLeverage(symbol, leverage)
+    .then(() => {
+      const lastPrice = api.getSymbolPrice(symbol)
+        .then(data => {
+          const usdtBalance = api.getAccountInfo()
+            .then(data => {
+              data.balances.filter(balance => {
+                return balance.asset === "BTC"
+              })
+            })
+          let valorParaCompra = usdtBalance * percentualCompra;
+          let quantidadeBTC = valorParaCompra / data.lastPrice;
 
-  // api.marginType(symbol, "CROSSED");
-
-  // api.setLeverage(symbol, leverage)
-  //   .then(data => {
-  //     const order = api.newOrder(symbol, quantidadeBTC, "BUY")
-  //       .then(data => {
-  //         res.json(data);
-  //       })
-  //       .catch(err => {
-  //         res.json(err);
-  //       })
-  //   })
-  //   .catch(err => {
-  //     res.json(err);
-  //   })
+          api.newOrder(symbol, quantidadeBTC, "BUY")
+            .then(order => {
+              res.json(order);
+            })
+            .catch(err => {
+              res.json(err);
+            })
+        })
+    })
+    .catch(err => {
+      res.json(err);
+    })
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
