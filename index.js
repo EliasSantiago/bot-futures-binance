@@ -3,7 +3,7 @@ const express = require("express");
 const api = require('./api');
 const app = express();
 let symbol = "BTCUSDT";
-let quantity = "0.001827";
+let quantity = "0.00462962963";
 let leverage = 20;
 
 app.use(express.json());
