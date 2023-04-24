@@ -38,7 +38,7 @@ app.use('/', async (req, res, next) => {
   console.log(process.env.PORT);
   console.log(process.env.API_KEY);
   console.log(process.env.SECRET_KEY);
-  res.json('Bot Futures Binance')
+  //res.json('Bot Futures Binance')
 })
 
 app.listen(process.env.PORT, () => {
