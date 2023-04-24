@@ -10,16 +10,14 @@ app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
   const setLeverage = await api.setLeverage(symbol, leverage)
-    .then(order => {
+    .then(data => {
       const order = api.newOrder(symbol, quantity, "BUY")
-        .then(order => {
+        .then(data => {
           return order;
         })
         .catch(err => {
           return err
         })
-    })
-    .then(order => {
       res.json(order);
     })
     .catch(err => {
