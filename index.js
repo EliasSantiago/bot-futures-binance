@@ -4,19 +4,26 @@ const api = require('./api');
 const app = express();
 let symbol = "BTCUSDT";
 let quantity = "0.01";
+let leverage = 20;
 
 app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
-  const order = await api.newOrder(symbol, quantity, "BUY")
+  const setLeverage = await api.setLeverage(symbol, leverage)
     .then(data => {
-      console.log(data);
-      res.json(data);
+      const order = api.newOrder(symbol, quantity, "BUY")
+        .then(data => {
+          console.log(data);
+          res.json(data);
+        })
+        .catch(err => {
+          console.error(err)
+        })
+      res.json(order);
     })
     .catch(err => {
-      console.error(err)
+      res.json(err);
     })
-    res.json(order);
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
@@ -30,7 +37,7 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
     .catch(err => {
       console.error(err)
     })
-    res.json(order);
+  res.json(order);
 })
 
 app.use('/', async (req, res, next) => {
