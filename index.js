@@ -10,10 +10,13 @@ app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
   //await api.marginType(symbol, "CROSSED");
-
+  var btc = 0.001827;
+  var satoshis = btc * 100000000;
+  var decimais = satoshis.toFixed(8);
+  
   await api.setLeverage(symbol, leverage)
     .then(data => {
-      const order = api.newOrder(symbol, quantity, "BUY")
+      const order = api.newOrder(symbol, decimais, "BUY")
         .then(data => {
           res.json(data);
         })
