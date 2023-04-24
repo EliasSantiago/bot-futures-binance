@@ -25,6 +25,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
     .catch(err => {
       res.json(err);
     })
+    res.json(order);
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
