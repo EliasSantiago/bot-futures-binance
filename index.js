@@ -21,6 +21,8 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
                 return balance.asset === "BTC"
               })
             })
+
+          return res.json(usdtBalance,  lastPrice)
           let valorParaCompra = usdtBalance * percentualCompra;
           let quantidadeBTC = valorParaCompra / lastPrice;
 
