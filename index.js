@@ -33,6 +33,7 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
 
   const openOrders = await  api.openOrders(symbol)
     .then(openOrders => {
+      res.json('foi')
       res.json(openOrders)
     })
     .catch(err => {
