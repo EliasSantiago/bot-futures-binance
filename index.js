@@ -31,19 +31,27 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
   let quantity = "0.1";
   let leverage = 20;
 
-  await api.setLeverage(symbol, leverage)
-    .then(data => {
-      const order = api.newOrder(symbol, quantity, "SELL")
-        .then(data => {
-          res.json(data);
-        })
-        .catch(err => {
-          res.json(err);
-        })
+  const openOrders = await  api.openOrders(symbol)
+    .then(openOrders => {
+      res.json(openOrders)
     })
     .catch(err => {
-      res.json(err);
+      res.json(err.message);
     })
+
+  // await api.setLeverage(symbol, leverage)
+  //   .then(data => {
+  //     const order = api.newOrder(symbol, quantity, "SELL")
+  //       .then(data => {
+  //         res.json(data);
+  //       })
+  //       .catch(err => {
+  //         res.json(err);
+  //       })
+  //   })
+  //   .catch(err => {
+  //     res.json(err);
+  //   })
 })
 
 app.use('/', async (req, res, next) => {
