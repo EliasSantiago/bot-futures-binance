@@ -34,7 +34,7 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
 })
 
 app.use('/', async (req, res, next) => {
-  res.json('Bot Futures Binance');
+  res.json(process.env.API_KEY);
   // console.log(process.env.PORT);
   // console.log(process.env.API_KEY);
   // console.log(process.env.SECRET_KEY);
