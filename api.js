@@ -70,9 +70,10 @@ async function getAccountInfo() {
   const recvWindows = 60000;
   const signature = crypto
     .createHmac('sha256', apiSecret)
-    .update(`${new URLSearchParams({timestamp, recvWindows}).toString()}`)
+    .update(`${new URLSearchParams({...data, timestamp, recvWindows}).toString()}`)
     .digest('hex');
-  const qs = `?${new URLSearchParams({timestamp, recvWindows, signature}).toString()}`;
+  const newData = { ...data, timestamp, recvWindows, signature };
+  const qs = `?${new URLSearchParams(newData).toString()}`;
 
   const result = await axios({
     method: 'GET',

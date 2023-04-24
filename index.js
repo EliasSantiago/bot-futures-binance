@@ -3,36 +3,22 @@ const express = require("express");
 const api = require('./api');
 const app = express();
 let symbol = "BTCUSDT";
-let quantity = "0.01";
+let quantity = "0,000037";
 let leverage = 20;
-let percentualCompra = 0.25;
-
 
 app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
-  api.setLeverage(symbol, leverage)
-    .then(() => {
-      const lastPrice = api.getSymbolPrice(symbol)
-        .then(() => {
-          const usdtBalance = api.getAccountInfo()
-            .then(data => {
-              data.balances.filter(balance => {
-                return balance.asset === "BTC"
-              })
-            })
+  //await api.marginType(symbol, "CROSSED");
 
-          return res.json(usdtBalance,  lastPrice)
-          let valorParaCompra = usdtBalance * percentualCompra;
-          let quantidadeBTC = valorParaCompra / lastPrice;
-
-          api.newOrder(symbol, quantidadeBTC, "BUY")
-            .then(order => {
-              res.json(order);
-            })
-            .catch(err => {
-              res.json(err);
-            })
+  await api.setLeverage(symbol, leverage)
+    .then(data => {
+      const order = api.newOrder(symbol, quantity, "BUY")
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          res.json(err);
         })
     })
     .catch(err => {
