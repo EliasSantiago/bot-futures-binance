@@ -10,7 +10,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
   let quantity = "0.1";
   let leverage = 20;
 
-  await api.marginType(symbol, "CROSSED");
+  //await api.marginType(symbol, "CROSSED");
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
@@ -32,7 +32,7 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
   let quantity = "0.1";
   let leverage = 20;
 
-  await api.marginType(symbol, "CROSSED");
+  //await api.marginType(symbol, "CROSSED");
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
@@ -54,7 +54,7 @@ app.use('/trandingview-ethusdt-buy', async (req, res, next) => {
   let quantity = "0.1";
   let leverage = 20;
 
-  await api.marginType(symbol, "CROSSED");
+  //await api.marginType(symbol, "CROSSED");
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
@@ -76,7 +76,7 @@ app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
   let quantity = "0.1";
   let leverage = 20;
 
-  await api.marginType(symbol, "CROSSED");
+  //await api.marginType(symbol, "CROSSED");
 
   await api.setLeverage(symbol, leverage)
     .then(data => {

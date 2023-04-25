@@ -86,7 +86,6 @@ async function setLeverage(symbol, leverage) {
 }
 
 async function marginType(symbol, marginType) {
-  //converte symbol para minúsculo
   symbol = symbol.toLowerCase();
   const data = { symbol, marginType };
   const timestamp = Date.now();
