@@ -14,7 +14,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
-      const order = api.newOrder(symbol, quantity, "BUY")
+      const order = api.newOrder(symbol, quantity, "BUY", "LONG")
         .then(data => {
           res.json(data);
         })
@@ -36,7 +36,7 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
-      const order = api.newOrder(symbol, quantity, "SELL")
+      const order = api.newOrder(symbol, quantity, "SELL", "SHORT")
         .then(data => {
           res.json(data);
         })
@@ -58,7 +58,7 @@ app.use('/trandingview-ethusdt-buy', async (req, res, next) => {
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
-      const order = api.newOrder(symbol, quantity, "BUY")
+      const order = api.newOrder(symbol, quantity, "BUY", "LONG")
         .then(data => {
           res.json(data);
         })
@@ -80,7 +80,7 @@ app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
-      const order = api.newOrder(symbol, quantity, "SELL")
+      const order = api.newOrder(symbol, quantity, "SELL", "SHORT")
         .then(data => {
           res.json(data);
         })

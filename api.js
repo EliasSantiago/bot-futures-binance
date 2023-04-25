@@ -5,7 +5,7 @@ const apiKey = process.env.API_KEY;
 const apiSecret = process.env.SECRET_KEY;
 const apiUrl = process.env.API_URL;
 
-async function newOrder(symbol, quantity, positionSide) {
+async function newOrder(symbol, quantity, side, positionSide) {
   const data = { symbol, positionSide, quantity, type: "MARKET" };
   const timestamp = Date.now();
   const recvWindows = 60000;
