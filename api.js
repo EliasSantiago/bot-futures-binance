@@ -25,6 +25,26 @@ async function newOrder(symbol, quantity, side = "BUY") {
   return result.data;
 }
 
+async function positionsBySymbol(symbol) {
+  const data = { symbol };
+  const timestamp = Date.now();
+  const recvWindows = 60000;
+  const signature = crypto
+    .createHmac('sha256', apiSecret)
+    .update(`${new URLSearchParams({...data, timestamp, recvWindows}).toString()}`)
+    .digest('hex');
+  const newData = { ...data, timestamp, recvWindows, signature };
+  const qs = `?${new URLSearchParams(newData).toString()}`;
+
+  const result = await axios({
+    method: 'GET',
+    url: `${apiUrl}v1/position${qs}`,
+    headers: { 'X-MBX-APIKEY': apiKey }
+  });
+
+  return result.data;
+}
+
 async function openOrders(symbol) {
   const data = { symbol };
   const timestamp = Date.now();
@@ -128,5 +148,6 @@ module.exports = {
   marginType,
   getAccountInfo,
   getSymbolPrice,
-  openOrders
+  openOrders,
+  positions
 }

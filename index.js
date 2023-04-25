@@ -46,9 +46,9 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
     })
 })
 
-app.use('/open-orders', async (req, res, next) => {
+app.use('/open-positions', async (req, res, next) => {
   const symbol = "BTCUSDT";
-  const orders = await api.openOrders(symbol);
+  const orders = await api.positionsBySymbol(symbol);
   res.json(orders);
 })
 
