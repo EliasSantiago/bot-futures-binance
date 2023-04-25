@@ -38,7 +38,7 @@ async function positionsBySymbol(symbol) {
 
   const result = await axios({
     method: 'GET',
-    url: `${apiUrl}v1/position${qs}`,
+    url: `${apiUrl}v1/positionRisk${qs}`,
     headers: { 'X-MBX-APIKEY': apiKey }
   });
 
