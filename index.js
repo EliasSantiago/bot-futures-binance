@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
-  //await api.marginType(symbol, "CROSSED");
+  await api.marginType(symbol, "CROSSED");
   let symbol = "BTCUSDT";
   let quantity = "0.1";
   let leverage = 20;
@@ -27,6 +27,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
+  await api.marginType(symbol, "CROSSED");
   const symbol = "BTCUSDT";
   let quantity = "0.1";
   let leverage = 20;
@@ -47,7 +48,7 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
 })
 
 app.use('/trandingview-ethusdt-buy', async (req, res, next) => {
-  //await api.marginType(symbol, "CROSSED");
+  await api.marginType(symbol, "CROSSED");
   let symbol = "ETHUSDT";
   let quantity = "0.1";
   let leverage = 20;
@@ -68,6 +69,7 @@ app.use('/trandingview-ethusdt-buy', async (req, res, next) => {
 })
 
 app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
+  await api.marginType(symbol, "CROSSED");
   const symbol = "ETHUSDT";
   let quantity = "0.1";
   let leverage = 20;
