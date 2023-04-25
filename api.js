@@ -25,7 +25,7 @@ async function newOrder(symbol, quantity, side, positionSide) {
   return result.data;
 }
 
-async function positionsBySymbol(symbol='') {
+async function positionsBySymbol(symbol) {
   const data = { symbol };
   const timestamp = Date.now();
   const recvWindows = 60000;

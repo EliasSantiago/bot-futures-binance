@@ -95,9 +95,9 @@ app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
     })
 })
 
-app.use('/open-positions', async (req, res, next) => {
+app.use('/open-positions-btc', async (req, res, next) => {
   const symbol = "BTCUSDT";
-  const orders = await api.positionsBySymbol()
+  const orders = await api.positionsBySymbol(symbol)
     .then(data => {
       res.json(data);
     })
