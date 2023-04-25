@@ -5,7 +5,7 @@ const apiKey = process.env.API_KEY;
 const apiSecret = process.env.SECRET_KEY;
 const apiUrl = process.env.API_URL;
 
-async function newOrder(symbol, quantity, side) {
+async function newOrder(symbol, quantity, side = "BUY") {
   const data = { symbol, side, quantity, type: "MARKET" };
   const timestamp = Date.now();
   const recvWindows = 60000;
@@ -38,7 +38,7 @@ async function openOrders(symbol) {
 
   const result = await axios({
     method: 'GET',
-    url: `${apiUrl}v1/allOrders${qs}`,
+    url: `${apiUrl}v1/openOrder${qs}`,
     headers: { 'X-MBX-APIKEY': apiKey }
   });
 
