@@ -48,8 +48,13 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
 
 app.use('/open-positions', async (req, res, next) => {
   const symbol = "BTCUSDT";
-  const orders = await api.positionsBySymbol(symbol);
-  res.json(orders);
+  const orders = await api.positionsBySymbol(symbol)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.json(err);
+    })
 })
 
 app.use('/', async (req, res, next) => {
