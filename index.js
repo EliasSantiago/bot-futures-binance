@@ -46,6 +46,47 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
     })
 })
 
+app.use('/trandingview-ethusdt-buy', async (req, res, next) => {
+  //await api.marginType(symbol, "CROSSED");
+  let symbol = "ETHUSDT";
+  let quantity = "0.1";
+  let leverage = 20;
+
+  await api.setLeverage(symbol, leverage)
+    .then(data => {
+      const order = api.newOrder(symbol, quantity, "BUY")
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          res.json(err);
+        })
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
+app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
+  const symbol = "ETHUSDT";
+  let quantity = "0.1";
+  let leverage = 20;
+
+  await api.setLeverage(symbol, leverage)
+    .then(data => {
+      const order = api.newOrder(symbol, quantity, "SELL")
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          res.json(err);
+        })
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
 app.use('/open-positions', async (req, res, next) => {
   const symbol = "BTCUSDT";
   const orders = await api.positionsBySymbol(symbol)
