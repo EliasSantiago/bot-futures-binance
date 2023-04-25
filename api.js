@@ -5,8 +5,8 @@ const apiKey = process.env.API_KEY;
 const apiSecret = process.env.SECRET_KEY;
 const apiUrl = process.env.API_URL;
 
-async function newOrder(symbol, quantity, side = "BUY") {
-  const data = { symbol, side, quantity, type: "MARKET" };
+async function newOrder(symbol, quantity, positionSide = "BUY") {
+  const data = { symbol, positionSide, quantity, type: "MARKET" };
   const timestamp = Date.now();
   const recvWindows = 60000;
   const signature = crypto
