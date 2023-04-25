@@ -12,6 +12,8 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 
   //await api.marginType(symbol, "CROSSED");
 
+  //Verificar se existe posição aberta
+
   await api.setLeverage(symbol, leverage)
     .then(data => {
       const order = api.newOrder(symbol, quantity, "BUY", "LONG")
@@ -95,7 +97,7 @@ app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
 
 app.use('/open-positions', async (req, res, next) => {
   const symbol = "BTCUSDT";
-  const orders = await api.positionsBySymbol(symbol)
+  const orders = await api.positionsBySymbol()
     .then(data => {
       res.json(data);
     })
