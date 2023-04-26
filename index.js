@@ -106,13 +106,9 @@ app.use('/open-positions-btc', async (req, res, next) => {
 })
 
 app.use('position-side', async (req, res, next) => {
-  const position = await api.positionSide()
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.json(err);
-    })
+  res.json('teste');
+
+ 
 })
 
 app.use('/', async (req, res, next) => {
