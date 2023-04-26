@@ -42,7 +42,7 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
 
   await api.setLeverage(symbol, leverage)
     .then(data => {
-      const order = api.newOrder(symbol, quantity, "SELL", "SHORT")
+      const order = api.newOrder(symbol, quantity, "SELL")
         .then(data => {
           res.json(data);
         })
