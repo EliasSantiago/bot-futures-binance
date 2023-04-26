@@ -151,6 +151,5 @@ module.exports = {
   getAccountInfo,
   getSymbolPrice,
   openOrders,
-  positionsBySymbol,
-  positionSide
+  positionsBySymbol
 }
