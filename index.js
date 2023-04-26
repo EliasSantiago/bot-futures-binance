@@ -15,7 +15,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
   //await api.marginType(symbol, "CROSSED");
   //Verificar se existe posição aberta
 
-  const orderExists = await api.positions()
+  const orderExists = await api.positionsBySymbol(symbol)
     .then(data => {
       res.json(data)
     })
