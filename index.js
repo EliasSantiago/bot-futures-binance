@@ -17,7 +17,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 
   const orderExists = await api.positionsBySymbol(symbol)
 
-  if (orderExists.length > 0 && orderExists[0].positionAmt > 0) {
+  if (orderExists.length == 0 || (orderExists.length > 0 && orderExists[0].positionAmt < 0)) {
     const order = api.newOrder(symbol, quantity, "BUY", "LONG")
       .then(data => {
         res.json(data);
@@ -25,6 +25,8 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
       .catch(err => {
         res.json(err);
       })
+  } else if (orderExists.length > 0 && orderExists[0].positionAmt > 0) {
+    return
   }
 })
 
@@ -97,16 +99,6 @@ app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
 app.use('/open-positions-btc', async (req, res, next) => {
   const symbol = "BTCUSDT";
   const orders = await api.positionsBySymbol(symbol)
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
-
-app.use('/position-side', async (req, res, next) => {
-  const position = await api.positionSide()
     .then(data => {
       res.json(data);
     })
