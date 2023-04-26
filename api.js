@@ -59,7 +59,7 @@ async function positions() {
 
   const result = await axios({
     method: 'GET',
-    url: `${apiUrl}v1/positionSide${qs}`,
+    url: `${apiUrl}v1/positionSide/dual${qs}`,
     headers: { 'X-MBX-APIKEY': apiKey }
   });
 
