@@ -16,18 +16,21 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
   //Verificar se existe posição aberta
 
   const orderExists = await api.positionsBySymbol(symbol)
+    .then(data => {
+      res.json(data)
+    })
 
-  if (orderExists.length == 0 || (orderExists.length > 0 && orderExists[0].positionAmt < 0)) {
-    const order = api.newOrder(symbol, quantity, "BUY", "LONG")
-      .then(data => {
-        res.json(data);
-      })
-      .catch(err => {
-        res.json(err);
-      })
-  } else if (orderExists.length > 0 && orderExists[0].positionAmt > 0) {
-    return
-  }
+  // if (orderExists.length == 0 || (orderExists.length > 0 && orderExists[0].positionAmt < 0)) {
+  //   const order = api.newOrder(symbol, quantity, "BUY", "LONG")
+  //     .then(data => {
+  //       res.json(data);
+  //     })
+  //     .catch(err => {
+  //       res.json(err);
+  //     })
+  // } else if (orderExists.length > 0 && orderExists[0].positionAmt > 0) {
+  //   return
+  // }
 })
 
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
