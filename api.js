@@ -46,6 +46,26 @@ async function positionsBySymbol(symbol) {
   return result.data;
 }
 
+async function positions() {
+  const timestamp = Date.now();
+  const recvWindows = 60000;
+  const signature = crypto
+    .createHmac('sha256', apiSecret)
+    .update(`${new URLSearchParams({timestamp, recvWindows}).toString()}`)
+    .digest('hex');
+
+  const newData = { timestamp, recvWindows, signature };
+  const qs = `?${new URLSearchParams(newData).toString()}`;
+
+  const result = await axios({
+    method: 'GET',
+    url: `${apiUrl}v1/positionSide${qs}`,
+    headers: { 'X-MBX-APIKEY': apiKey }
+  });
+
+  return result.data;
+}
+
 async function openOrders(symbol) {
   const data = { symbol };
   const timestamp = Date.now();
@@ -151,5 +171,6 @@ module.exports = {
   getAccountInfo,
   getSymbolPrice,
   openOrders,
-  positionsBySymbol
+  positionsBySymbol,
+  positions
 }
