@@ -15,7 +15,6 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 
   if (orderExists.length == 0 || (orderExists.length > 0 && orderExists[0].positionAmt < 0)) {
     const currentPosition = orderExists[0];
-    const qty = currentPosition.positionAmt;
     const closePosition = await api.openPosition(symbol, qty, "BUY", "MARKET")
       .then(data => {
         const openPosition = api.openPosition(symbol, qty, "BUY", "MARKET")
@@ -46,7 +45,6 @@ app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
 
   if (orderExists.length == 0 || (orderExists.length > 0 && orderExists[0].positionAmt > 0)) {
     const currentPosition = orderExists[0];
-    const qty = currentPosition.positionAmt;
     const closePosition = await api.openPosition(symbol, qty, "SELL", "MARKET")
       .then(data => {
         const openPosition = api.openPosition(symbol, qty, "SELL", "MARKET")
@@ -77,7 +75,6 @@ app.use('/trandingview-ethusdt-buy', async (req, res, next) => {
 
   if (orderExists.length == 0 || (orderExists.length > 0 && orderExists[0].positionAmt < 0)) {
     const currentPosition = orderExists[0];
-    const qty = currentPosition.positionAmt;
     const closePosition = await api.openPosition(symbol, qty, "BUY", "MARKET")
       .then(data => {
         const openPosition = api.openPosition(symbol, qty, "BUY", "MARKET")
@@ -108,7 +105,6 @@ app.use('/trandingview-ethusdt-sell', async (req, res, next) => {
 
   if (orderExists.length == 0 || (orderExists.length > 0 && orderExists[0].positionAmt > 0)) {
     const currentPosition = orderExists[0];
-    const qty = currentPosition.positionAmt;
     const closePosition = await api.openPosition(symbol, qty, "SELL", "MARKET")
       .then(data => {
         const openPosition = api.openPosition(symbol, qty, "SELL", "MARKET")
