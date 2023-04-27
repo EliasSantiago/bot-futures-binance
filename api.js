@@ -5,8 +5,8 @@ const apiKey = process.env.API_KEY;
 const apiSecret = process.env.SECRET_KEY;
 const apiUrl = process.env.API_URL;
 
-async function newOrder(symbol, quantity, side) {
-  const data = { symbol, side, quantity, type: "MARKET" };
+async function openPosition(symbol, quantity, side, type) {
+  const data = { symbol, quantity, side, type };
   const timestamp = Date.now();
   const recvWindows = 60000;
   const signature = crypto
@@ -145,7 +145,7 @@ async function getSymbolPrice(symbol) {
 }
 
 module.exports = {
-  newOrder,
+  openPosition,
   setLeverage,
   marginType,
   getAccountInfo,
