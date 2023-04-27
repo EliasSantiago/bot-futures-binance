@@ -39,7 +39,7 @@ app.use('/trandingview-btcusdt-buy', async (req, res, next) => {
 app.use('/trandingview-btcusdt-sell', async (req, res, next) => {
   let symbol = "BTCUSDT";
   let qty = "0.1";
-  let leverage = 50;
+  let leverage = 20;
 
   await api.setLeverage(symbol, leverage)
   const orderExists = await api.positionsBySymbol(symbol)
